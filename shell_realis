@@ -1,0 +1,30 @@
+pr=0 #количество прерываний
+fr=g #счетчик для цикла
+
+echo waiting
+trap 'fun' SIGINT #обработка прерывания
+fun()#функция обработки прерывания
+{ 
+    #echo $pr #вывод количества прерываний
+    pr=`expr $pr + 1` #+1
+    echo _	
+    date +%T #вывод времени				
+}
+
+users|cat #вывод пользователей через межпроцессный канал
+
+
+while :  #цикл для возможности прерывания
+ do 
+    f=0 
+    echo write h to enter
+    read fr
+    f=1
+    if [ $f -eq 1 ]
+       then
+           if [ $fr -eq'h' ]
+              then
+                 exit 0
+           fi
+    fi
+ done
